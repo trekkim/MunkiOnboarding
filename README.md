@@ -4,9 +4,57 @@ A native Swift/SwiftUI macOS onboarding agent deployed during MDM zero-touch enr
 
 ---
 
+## Background & Problem Statement
+
+### The problem with zero-touch enrollment
+
+Zero-touch MDM enrollment is great for IT teams — a new Mac arrives, the user powers it on, and everything installs automatically. But from the user's perspective, it's a black box. The screen shows a spinning cursor, nothing appears to happen, and depending on the software catalogue it can take 30–60 minutes. Users don't know if the Mac is working, stuck, or waiting for them to do something. Support tickets follow.
+
+### Existing tools and the gap
+
+Tools like **DEPNotify** and **Erik Gomez's Hello** are great and widely used in the Mac admin community. For our specific needs and deployment setup, they have their limits — which led us to build something tailored to how we use Munki.
+
+### Why MunkiOnboarding
+
+The goal was simple: build something that **actually listens to Munki** and shows the user what is really happening.
+
+MunkiOnboarding connects directly to Munki's own data sources:
+
+- **`InstallInfo.plist`** — the source of truth for what Munki plans to install, and what it has completed
+- **DistributedNotificationCenter** — Munki broadcasts live status updates (message, detail, percent complete, item name) during every install operation
+- **Plist polling** — reads `InstallInfo.plist` every 2 seconds as a reliable ground truth for per-item completion, independent of notification matching
+
+This means every status shown to the user — pending, downloading, installing, installed, failed — comes directly from Munki in real time. No scripting, no estimates, no hardcoded app lists.
+
+### Where it fits in a zero-touch flow
+
+MunkiOnboarding does **not** install Munki or trigger the enrollment process. It is deployed as a PKG alongside your existing zero-touch toolchain (InstallApplications, MDM, etc.). Munki is already running when MunkiOnboarding launches. The app surfaces what Munki is doing in a native window and gets out of the way when it's done.
+
+```
+MDM enrollment
+    └── InstallApplications
+            ├── Munki              ← does the actual software installation
+            └── MunkiOnboarding    ← shows the user what Munki is doing
+                    ├── Provisioning  (real-time install progress)
+                    ├── Optional Software  (user picks additional apps)
+                    └── Completion  (Log Out → FileVault activation)
+```
+
+### What MunkiOnboarding provides
+
+| | MunkiOnboarding |
+|---|---|
+| Install progress | Live from Munki |
+| Per-app status | Real-time per-item state |
+| Error visibility | Automatic from `problem_items` |
+| Optional software | Built-in, writes to SelfServeManifest |
+| Branding | Configurable via plist + custom.zip |
+
+---
+
 ## Requirements
 
-- macOS 26 or later
+- macOS 15 or later
 - Munki 6+ installed on the Mac
 - Munki software repository accessible to the Mac
 
@@ -40,7 +88,6 @@ xcodebuild -project MunkiOnboarding.xcodeproj \
   -configuration Release \
   -archivePath build/MunkiOnboarding.xcarchive archive
 ```
-cp -R build/MunkiOnboarding.xcarchive/Products/Applications/MunkiOnboarding.app build/
 
 ### 2. Build the PKG with munkipkg
 
