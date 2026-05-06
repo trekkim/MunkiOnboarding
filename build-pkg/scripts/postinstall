@@ -1,0 +1,25 @@
+#!/bin/bash
+set -e
+
+LAUNCH_AGENT_SRC="/Library/LaunchAgents/com.trendmicro.MunkiOnboarding.plist"
+
+# Correct ownership and permissions on the app and LaunchAgent
+chown -R root:wheel /Applications/MunkiOnboarding.app
+chmod -R 755 /Applications/MunkiOnboarding.app
+
+chown root:wheel "$LAUNCH_AGENT_SRC"
+chmod 644 "$LAUNCH_AGENT_SRC"
+
+# Find the currently logged-in console user (may be empty during Setup Assistant)
+CONSOLE_USER=$(stat -f "%Su" /dev/console 2>/dev/null || true)
+
+if [[ -n "$CONSOLE_USER" && "$CONSOLE_USER" != "root" && "$CONSOLE_USER" != "loginwindow" ]]; then
+    CONSOLE_UID=$(id -u "$CONSOLE_USER")
+    # Bootstrap the agent into the user's Aqua session immediately
+    launchctl bootstrap "gui/${CONSOLE_UID}" "$LAUNCH_AGENT_SRC" 2>/dev/null || true
+fi
+
+# If no user is logged in, the LaunchAgent will auto-load at next login
+# because it lives in /Library/LaunchAgents/ with LimitLoadToSessionType = Aqua
+
+exit 0

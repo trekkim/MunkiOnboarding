@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>catalogs</key>
+	<array>
+		<string>MDM</string>
+	</array>
+
+	<key>managed_installs</key>
+	<array/>
+
+	<key>managed_uninstalls</key>
+	<array/>
+
+	<key>managed_updates</key>
+	<array/>
+
+	<key>included_manifests</key>
+	<array/>
+
+
+	<key>optional_installs</key>
+	<array>
+
+		<!-- ── Browsers ───────────────────────────────────────── -->
+		<string>Arc</string>
+
+		<!-- ── Password Managers ──────────────────────────────── -->
+		<string>1Password</string>
+		<string>MacPass</string>
+
+		<!-- ── Communication & Conferencing ───────────────────── -->
+		<string>Webex</string>
+		<string>Signal_Desktop</string>
+		<string>Threema</string>
+
+		<!-- ── Productivity ────────────────────────────────────── -->
+		<string>AdobeAcrobatDC</string>
+		<string>Evernote</string>
+		<string>Obsidian</string>
+		<string>ClaudeDesktop</string>
+
+		<!-- ── Development ─────────────────────────────────────── -->
+		<string>Visual Studio Code</string>
+		<string>SublimeText4</string>
+		<string>GitHub Desktop</string>
+		<string>PostMan-Installomator</string>
+
+		<!-- ── Utilities ───────────────────────────────────────── -->
+		<string>KeepAwake</string>
+		<string>Keka</string>
+		<string>IINA</string>
+
+	</array>
+</dict>
+</plist>

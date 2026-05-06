@@ -6,7 +6,7 @@ A native Swift/SwiftUI macOS onboarding agent deployed during MDM zero-touch enr
 
 ## Requirements
 
-- macOS 15 or later
+- macOS 26 or later
 - Munki 6+ installed on the Mac
 - Munki software repository accessible to the Mac
 
@@ -40,6 +40,7 @@ xcodebuild -project MunkiOnboarding.xcodeproj \
   -configuration Release \
   -archivePath build/MunkiOnboarding.xcarchive archive
 ```
+cp -R build/MunkiOnboarding.xcarchive/Products/Applications/MunkiOnboarding.app build/
 
 ### 2. Build the PKG with munkipkg
 

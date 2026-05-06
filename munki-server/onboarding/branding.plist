@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+
+	<!-- ── Welcome screen ───────────────────────────────── -->
+	<key>WelcomeTitle</key>
+	<string>Welcome to Your New Mac</string>
+
+	<key>WelcomeSubtitle</key>
+	<string>We're setting up your Mac with everything you need.
+This process takes a few minutes — please stay connected to the internet.</string>
+
+	<key>WelcomeFeatures</key>
+	<array>
+		<dict>
+			<key>icon</key><string>shippingbox.fill</string>
+			<key>text</key><string>Software installed automatically via Munki</string>
+		</dict>
+		<dict>
+			<key>icon</key><string>person.badge.shield.checkmark</string>
+			<key>text</key><string>Security tools configured for your region</string>
+		</dict>
+		<dict>
+			<key>icon</key><string>lock.shield.fill</string>
+			<key>text</key><string>FileVault encryption activated at first login</string>
+		</dict>
+	</array>
+
+	<key>WelcomeButtonText</key>
+	<string>Get Started</string>
+
+	<!-- ── Provisioning / installing screen ─────────────── -->
+	<key>ProvisioningTitle</key>
+	<string>Setting Up Your Mac</string>
+
+	<!-- ── Optional software screen ─────────────────────── -->
+	<key>OptionalTitle</key>
+	<string>Optional Software</string>
+
+	<key>OptionalSubtitle</key>
+	<string>Select any additional software you'd like installed on your Mac.</string>
+
+	<!-- ── Completion screen ─────────────────────────────── -->
+	<key>CompletionTitle</key>
+	<string>Setup Complete</string>
+
+	<key>CompletionSubtitle</key>
+	<string>Your Mac is ready to use.</string>
+
+	<key>CompletionFileVaultNote</key>
+	<string>To activate FileVault encryption, log out and log back in. Your Mac will complete encryption in the background.</string>
+
+	<key>CompletionLogoutText</key>
+	<string>Log Out</string>
+
+	<!-- ── Window behaviour ──────────────────────────────── -->
+	<!-- Set to true to allow the user to drag the window -->
+	<key>WindowMovable</key>
+	<false/>
+
+	<!-- ── Logos ─────────────────────────────────────────── -->
+	<!-- Place PNG files in the same onboarding/ folder as this plist -->
+	<key>LogoDarkFilename</key>
+	<string>logo-dark.png</string>
+
+	<key>LogoLightFilename</key>
+	<string>logo-light.png</string>
+
+</dict>
+</plist>

@@ -1,0 +1,14 @@
+{
+    "distribution_style": true,
+    "identifier": "com.trendmicro.MunkiOnboarding",
+    "install_location": "/",
+    "name": "MunkiOnboarding-${version}.pkg",
+    "ownership": "recommended",
+    "postinstall_action": "none",
+    "signing_info": {
+        "identity": "Developer ID Installer: EXAMPLE (XXXXXXXXX)",
+        "timestamp": true
+    },
+    "suppress_bundle_relocation": true,
+    "version": "1.0"
+}
